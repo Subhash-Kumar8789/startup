@@ -2,27 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>StyleCraft | Fashion Customization Prototype</title>
+  <title>Custom Aura | Personalized Fashion</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box;font-family:'Poppins',sans-serif}
     body{margin:0;background:linear-gradient(120deg,#f6f9ff,#eef1f7)}
 
-    /* Header */
-    header{padding:30px;text-align:center;background:#111;color:#fff}
-    header h1{margin:0;font-size:34px}
-    header p{opacity:.8;margin-top:8px}
+    header{padding:30px;text-align:center;background:#0f172a;color:#fff}
+    header h1{margin:0;font-size:36px}
+    header p{opacity:.85;margin-top:8px}
 
-    /* Controls */
     .controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:20px}
     .tabs button,.controls select{
       padding:10px 16px;border:none;border-radius:20px;margin:5px;cursor:pointer;
       box-shadow:0 4px 10px rgba(0,0,0,.1);background:#fff
     }
-    .tabs button.active{background:#111;color:#fff}
+    .tabs button.active{background:#0f172a;color:#fff}
 
-    /* Products */
     .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;padding:20px}
     .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.12);transition:.3s}
     .card:hover{transform:translateY(-6px)}
@@ -30,25 +27,13 @@
     .info{padding:16px}
     .info h4{margin:0}
     .info p{font-size:14px;opacity:.75;margin:6px 0}
-    .price{display:block;font-size:16px;font-weight:600;margin-bottom:10px}
-    .info button{
-      width:100%;padding:10px;border:none;border-radius:14px;
-      background:#111;color:#fff;cursor:pointer
-    }
+    .price{display:block;font-size:16px;font-weight:600;margin-bottom:6px}
+    .info button{width:100%;padding:10px;border:none;border-radius:14px;background:#0f172a;color:#fff;cursor:pointer}
 
-    /* Customization */
-    .customize{
-      display:none;background:#fff;margin:30px;border-radius:22px;
-      padding:25px;box-shadow:0 12px 35px rgba(0,0,0,.15)
-    }
-    .customize h2{margin-top:0}
+    .customize{display:none;background:#fff;margin:30px;border-radius:22px;padding:25px;box-shadow:0 12px 35px rgba(0,0,0,.15)}
     .row{display:flex;flex-wrap:wrap;gap:15px;margin-top:10px}
-    .row select,.row input,.row textarea{
-      flex:1;padding:12px;border-radius:12px;border:1px solid #ccc
-    }
-    .summary{
-      margin-top:15px;padding:15px;background:#f5f6fa;border-radius:15px;font-size:14px
-    }
+    .row select,.row input,.row textarea{flex:1;padding:12px;border-radius:12px;border:1px solid #ccc}
+    .summary{margin-top:18px;padding:16px;background:#eef2ff;border-radius:15px;font-size:15px}
 
     footer{text-align:center;padding:25px;color:#555}
   </style>
@@ -57,17 +42,19 @@
 
 <header>
   <h1>Custom Aura</h1>
-  <h1>CustomAura</h1>
-  <p>You Dream it....we made it</p>
+  <p>Design Your Style • Tailored Just for You</p>
 </header>
 
 <div class="controls">
   <div class="tabs">
     <button class="active" onclick="filterCat('all',this)">All</button>
+    <button onclick="filterCat('men-casual',this)">Men Casual</button>
+    <button onclick="filterCat('men-formal',this)">Men Formal</button>
+    <button onclick="filterCat('women-ethnic',this)">Women Ethnic</button>
+    <button onclick="filterCat('women-western',this)">Women Western</button>
     <button onclick="filterCat('boys',this)">Boys</button>
     <button onclick="filterCat('girls',this)">Girls</button>
-    <button onclick="filterCat('men',this)">Men</button>
-    <button onclick="filterCat('women',this)">Women</button>
+    <button onclick="filterCat('kids',this)">Kids</button>
   </div>
 
   <select onchange="sortProducts(this.value)">
@@ -79,67 +66,80 @@
 
 <section class="products" id="productList">
 
-  <!-- MEN -->
-  <div class="card" data-cat="men" data-price="799">
-    <img src="https://images.unsplash.com/photo-1602810319428-019690571b5b">
+  <!-- MEN CASUAL -->
+  <div class="card" data-cat="men-casual" data-price="699">
+    <img src="startup/casualtshirt.jpg">
     <div class="info">
-      <h4>Men's Formal Shirt</h4>
-      <p>Cotton • Slim Fit</p>
-      <span class="price">₹799</span>
-      <button onclick="customize('Men\'s Formal Shirt',799)">Customize</button>
+      <h4>Men Casual T‑Shirt</h4>
+      <p>Oversized • Street Fit</p>
+      <span class="price">Base Price: ₹699</span>
+      <button onclick="customize('Men Casual T-Shirt',699)">Customize</button>
     </div>
   </div>
 
-  <div class="card" data-cat="men" data-price="699">
-    <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47">
+  <!-- MEN FORMAL -->
+  <div class="card" data-cat="men-formal" data-price="899">
+    <img src="startup/formalshirt.jpg">
     <div class="info">
-      <h4>Men's Casual T-Shirt</h4>
-      <p>Oversized • Streetwear</p>
-      <span class="price">₹699</span>
-      <button onclick="customize('Men\'s Casual T-Shirt',699)">Customize</button>
+      <h4>Men Formal Shirt</h4>
+      <p>Office Wear • Cotton</p>
+      <span class="price">Base Price: ₹899</span>
+      <button onclick="customize('Men Formal Shirt',899)">Customize</button>
     </div>
   </div>
 
-  <!-- WOMEN -->
-  <div class="card" data-cat="women" data-price="999">
-    <img src="https://images.unsplash.com/photo-1618354691438-25bc04584c23">
+  <!-- WOMEN ETHNIC -->
+  <div class="card" data-cat="women-ethnic" data-price="1199">
+    <img src="startup/ethnic.jpg">
     <div class="info">
-      <h4>Women's Kurti</h4>
-      <p>Rayon • Regular Fit</p>
-      <span class="price">₹999</span>
-      <button onclick="customize('Women\'s Kurti',999)">Customize</button>
+      <h4>Women Ethnic Kurti</h4>
+      <p>Festive • Traditional Fit</p>
+      <span class="price">Base Price: ₹1199</span>
+      <button onclick="customize('Women Ethnic Kurti',1199)">Customize</button>
     </div>
   </div>
 
-  <div class="card" data-cat="women" data-price="1299">
-    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90">
+  <!-- WOMEN WESTERN -->
+  <div class="card" data-cat="women-western" data-price="1399">
+    <img src="startup/western.jpg">
     <div class="info">
-      <h4>Women's Dress</h4>
-      <p>Flared • Party Wear</p>
-      <span class="price">₹1299</span>
-      <button onclick="customize('Women\'s Dress',1299)">Customize</button>
+      <h4>Women Western Dress</h4>
+      <p>Modern • Party Wear</p>
+      <span class="price">Base Price: ₹1399</span>
+      <button onclick="customize('Women Western Dress',1399)">Customize</button>
     </div>
   </div>
 
   <!-- BOYS -->
   <div class="card" data-cat="boys" data-price="499">
-    <img src="https://images.unsplash.com/photo-1601924582975-7a7c4f92c6d1">
+    <img src="startup/boys.jpg">
     <div class="info">
-      <h4>Boys Printed T-Shirt</h4>
+      <h4>Boys Casual T‑Shirt</h4>
       <p>Soft Cotton</p>
-      <span class="price">₹499</span>
-      <button onclick="customize('Boys Printed T-Shirt',499)">Customize</button>
+      <span class="price">Base Price: ₹499</span>
+      <button onclick="customize('Boys Casual T-Shirt',499)">Customize</button>
     </div>
   </div>
 
   <!-- GIRLS -->
   <div class="card" data-cat="girls" data-price="599">
-    <img src="https://images.unsplash.com/photo-1622296089861-5f24f5c79b35">
+    <img src="startup/frock.jpg">
     <div class="info">
       <h4>Girls Frock</h4>
       <p>Comfort Fit</p>
-      <span class="price">₹599</span>
+      <span class="price">Base Price: ₹599</span>
       <button onclick="customize('Girls Frock',599)">Customize</button>
+    </div>
+  </div>
+
+  <!-- KIDS -->
+  <div class="card" data-cat="kids" data-price="549">
+    <img src="startup/kidsparty.jpg">
+    <div class="info">
+      <h4>Kids Party Wear</h4>
+      <p>Soft Fabric</p>
+      <span class="price">Base Price: ₹549</span>
+      <button onclick="customize('Kids Party Wear',549)">Customize</button>
     </div>
   </div>
 </section>
@@ -149,9 +149,28 @@
   <p id="prodPrice"></p>
 
   <div class="row">
-    <select><option>Color</option><option>Black</option><option>White</option><option>Blue</option><option>Red</option></select>
-    <select><option>Sleeve</option><option>Half</option><option>Full</option><option>Sleeveless</option></select>
-    <select><option>Fit</option><option>Slim</option><option>Regular</option><option>Loose</option></select>
+    <select id="colorType" onchange="toggleColorMode()">
+      <option value="">Color Preference</option>
+      <option value="available">Choose Available Color</option>
+      <option value="custom">Custom Color</option>
+    </select>
+    <select id="color" style="display:none">
+      <option value="">Select Color</option>
+      <option>Black</option>
+      <option>White</option>
+      <option>Blue</option>
+      <option>Red</option>
+      <option>Green</option>
+      <option>yellow</option>
+      <option>Orange</option>
+      <option>Pink</option>
+      <option>Purple</option>
+    
+    </select>
+    <input type="color" id="customColor" style="display:none;height:48px" />
+    <select id="sleeve" onchange="updatePrice()"><option value="0">Sleeve Type</option><option value="100">Full Sleeve (+₹100)</option><option value="50">Half Sleeve (+₹50)</option><option value="25">Below the Elbow(+25)</option><option>Above the elbow(+15)</option></select>
+    <select id="fit" onchange="updatePrice()"><option value="0">Fit Type</option><option value="150">Slim Fit (+₹150)</option><option value="100">Regular Fit (+₹100)</option></select>
+    <select id="fabric" onchange="updatePrice()"><option value="0">Fabric</option><option value="500">Cotton Fabric (+₹500)</option><option value="300">Silk Fabric (+₹300)</option><option value="200">Georgette Fabric (+₹200)</option></select>
   </div>
 
   <div class="row">
@@ -159,19 +178,37 @@
     <textarea placeholder="Measurements / special instructions"></textarea>
   </div>
 
-  <div class="summary">✔ Customization captured (Prototype – no backend)</div>
+  <div class="summary" id="finalPrice">Final Price: ₹0</div>
 </section>
 
 <footer>
-  © 2025 StyleCraft • Complete Frontend Prototype
+  © 2025 Custom Aura • Personalized Fashion Prototype
 </footer>
 
 <script>
+let basePrice = 0;
+
 function customize(name,price){
+  basePrice = price;
   document.getElementById('customBox').style.display='block';
   document.getElementById('prodName').innerText=name;
   document.getElementById('prodPrice').innerText='Base Price: ₹'+price;
+  updatePrice();
   window.scrollTo({top:document.getElementById('customBox').offsetTop-20,behavior:'smooth'});
+}
+
+function toggleColorMode(){
+  const type=document.getElementById('colorType').value;
+  document.getElementById('color').style.display= type==='available'?'block':'none';
+  document.getElementById('customColor').style.display= type==='custom'?'block':'none';
+}
+
+function updatePrice(){
+  const sleeve = Number(document.getElementById('sleeve').value);
+  const fit = Number(document.getElementById('fit').value);
+  const fabric = Number(document.getElementById('fabric').value);
+  const total = basePrice + sleeve + fit + fabric;
+  document.getElementById('finalPrice').innerText = 'Final Price After Customization: ₹' + total;
 }
 
 function filterCat(cat,btn){
