@@ -2,142 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>StyleCraft | Fashion Customization Prototype</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StyleCraft | Functional Prototype</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body{margin:0;font-family:Inter,sans-serif;background:#f8fafc;color:#0f172a}
-    header{background:#0f172a;color:#fff;padding:20px 40px}
-    header h1{margin:0;font-size:22px}
-    main{max-width:1100px;margin:40px auto;padding:0 30px}
-    h2{margin-bottom:10px}
-    p{color:#64748b}
+    *{box-sizing:border-box;font-family:'Poppins',sans-serif}
+    body{margin:0;background:linear-gradient(120deg,#f6f9ff,#eef1f7)}
 
-    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:25px}
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
-    .card img{width:100%;height:220px;object-fit:cover}
-    .card .info{padding:15px}
-    .info h3{margin:0 0 6px;font-size:16px}
-    .info p{font-size:13px;margin:0 0 10px}
-    .price{font-weight:700;margin-bottom:10px}
-    button{padding:10px 14px;border-radius:8px;border:none;cursor:pointer}
-    .primary{background:#2563eb;color:#fff}
+    /* Header */
+    header{padding:30px;text-align:center;background:#111;color:#fff}
+    header h1{margin:0;font-size:34px}
+    header p{opacity:.8;margin-top:8px}
 
-    /* Customization Panel */
-    .custom-box{display:none;margin-top:40px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:25px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
-    label{font-size:13px;font-weight:600}
-    select,input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e5e7eb;margin-top:5px}
-    .preview{margin-top:15px;padding:12px;background:#f1f5f9;border-radius:10px;font-size:14px}
-    .submit{margin-top:20px;width:100%;padding:14px;font-size:16px;background:#2563eb;color:white;border-radius:10px}
+    /* Controls */
+    .controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:20px}
+    .tabs button,.controls select{
+      padding:10px 16px;border:none;border-radius:20px;margin:5px;cursor:pointer;
+      box-shadow:0 4px 10px rgba(0,0,0,.1);background:#fff
+    }
+    .tabs button.active{background:#111;color:#fff}
+
+    /* Products */
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;padding:20px}
+    .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.12);transition:.3s}
+    .card:hover{transform:translateY(-6px)}
+    .card img{width:100%;height:260px;object-fit:cover}
+    .info{padding:16px}
+    .info h4{margin:0}
+    .info p{font-size:14px;opacity:.75;margin:6px 0}
+    .price{display:block;font-size:16px;font-weight:600;margin-bottom:10px}
+    .info button{
+      width:100%;padding:10px;border:none;border-radius:14px;
+      background:#111;color:#fff;cursor:pointer
+    }
+
+    /* Customization */
+    .customize{
+      display:none;background:#fff;margin:30px;border-radius:22px;
+      padding:25px;box-shadow:0 12px 35px rgba(0,0,0,.15)
+    }
+    .customize h2{margin-top:0}
+    .row{display:flex;flex-wrap:wrap;gap:15px;margin-top:10px}
+    .row select,.row input,.row textarea{
+      flex:1;padding:12px;border-radius:12px;border:1px solid #ccc
+    }
+    .summary{
+      margin-top:15px;padding:15px;background:#f5f6fa;border-radius:15px;font-size:14px
+    }
+
+    footer{text-align:center;padding:25px;color:#555}
   </style>
 </head>
 <body>
 
 <header>
-  <h1>StyleCraft – Functional Prototype</h1>
+  <h1>StyleCraft</h1>
+  <p>Browse • Customize • Get It Tailored & Delivered</p>
 </header>
 
-<main>
-  <h2>Select a Base Design</h2>
-  <p>Choose a product like Flipkart / Meesho, then customize it</p>
+<div class="controls">
+  <div class="tabs">
+    <button class="active" onclick="filterCat('all',this)">All</button>
+    <button onclick="filterCat('boys',this)">Boys</button>
+    <button onclick="filterCat('girls',this)">Girls</button>
+    <button onclick="filterCat('men',this)">Men</button>
+    <button onclick="filterCat('women',this)">Women</button>
+  </div>
 
-  <div class="products">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1520975439795-9d5fcb36f43b">
-      <div class="info">
-        <h3>Men Formal Shirt</h3>
-        <p>Cotton • Slim / Regular</p>
-        <div class="price">₹899</div>
-        <button class="primary" onclick="customize('Men Formal Shirt',899)">Customize</button>
-      </div>
-    </div>
+  <select onchange="sortProducts(this.value)">
+    <option value="default">Sort By</option>
+    <option value="low">Price: Low to High</option>
+    <option value="high">Price: High to Low</option>
+  </select>
+</div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246">
-      <div class="info">
-        <h3>Women Kurti</h3>
-        <p>Neck & sleeve customizable</p>
-        <div class="price">₹749</div>
-        <button class="primary" onclick="customize('Women Kurti',749)">Customize</button>
-      </div>
+<section class="products" id="productList">
+
+  <!-- MEN -->
+  <div class="card" data-cat="men" data-price="799">
+    <img src="https://images.unsplash.com/photo-1602810319428-019690571b5b">
+    <div class="info">
+      <h4>Men's Formal Shirt</h4>
+      <p>Cotton • Slim Fit</p>
+      <span class="price">₹799</span>
+      <button onclick="customize('Men\'s Formal Shirt',799)">Customize</button>
     </div>
   </div>
 
-  <!-- Customization -->
-  <div class="custom-box" id="customBox">
-    <h2>Customize: <span id="productName"></span></h2>
-
-    <div class="grid">
-      <div>
-        <label>Color</label>
-        <input type="color" id="color">
-      </div>
-      <div>
-        <label>Sleeve Length</label>
-        <select id="sleeve">
-          <option>Half</option>
-          <option>Full</option>
-          <option>Sleeveless</option>
-        </select>
-      </div>
-      <div>
-        <label>Fit</label>
-        <select id="fit">
-          <option>Slim</option>
-          <option>Regular</option>
-          <option>Oversized</option>
-        </select>
-      </div>
-      <div>
-        <label>Upload Reference Image</label>
-        <input type="file" id="image">
-      </div>
+  <div class="card" data-cat="men" data-price="699">
+    <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47">
+    <div class="info">
+      <h4>Men's Casual T-Shirt</h4>
+      <p>Oversized • Streetwear</p>
+      <span class="price">₹699</span>
+      <button onclick="customize('Men\'s Casual T-Shirt',699)">Customize</button>
     </div>
-
-    <label style="margin-top:15px">Measurements / Notes</label>
-    <textarea rows="3" id="notes"></textarea>
-
-    <div class="preview" id="preview"></div>
-
-    <button class="submit" onclick="placeOrder()">Place Order (Prototype)</button>
   </div>
-</main>
+
+  <!-- WOMEN -->
+  <div class="card" data-cat="women" data-price="999">
+    <img src="https://images.unsplash.com/photo-1618354691438-25bc04584c23">
+    <div class="info">
+      <h4>Women's Kurti</h4>
+      <p>Rayon • Regular Fit</p>
+      <span class="price">₹999</span>
+      <button onclick="customize('Women\'s Kurti',999)">Customize</button>
+    </div>
+  </div>
+
+  <div class="card" data-cat="women" data-price="1299">
+    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90">
+    <div class="info">
+      <h4>Women's Dress</h4>
+      <p>Flared • Party Wear</p>
+      <span class="price">₹1299</span>
+      <button onclick="customize('Women\'s Dress',1299)">Customize</button>
+    </div>
+  </div>
+
+  <!-- BOYS -->
+  <div class="card" data-cat="boys" data-price="499">
+    <img src="https://images.unsplash.com/photo-1601924582975-7a7c4f92c6d1">
+    <div class="info">
+      <h4>Boys Printed T-Shirt</h4>
+      <p>Soft Cotton</p>
+      <span class="price">₹499</span>
+      <button onclick="customize('Boys Printed T-Shirt',499)">Customize</button>
+    </div>
+  </div>
+
+  <!-- GIRLS -->
+  <div class="card" data-cat="girls" data-price="599">
+    <img src="https://images.unsplash.com/photo-1622296089861-5f24f5c79b35">
+    <div class="info">
+      <h4>Girls Frock</h4>
+      <p>Comfort Fit</p>
+      <span class="price">₹599</span>
+      <button onclick="customize('Girls Frock',599)">Customize</button>
+    </div>
+  </div>
+</section>
+
+<section class="customize" id="customBox">
+  <h2 id="prodName"></h2>
+  <p id="prodPrice"></p>
+
+  <div class="row">
+    <select><option>Color</option><option>Black</option><option>White</option><option>Blue</option><option>Red</option></select>
+    <select><option>Sleeve</option><option>Half</option><option>Full</option><option>Sleeveless</option></select>
+    <select><option>Fit</option><option>Slim</option><option>Regular</option><option>Loose</option></select>
+  </div>
+
+  <div class="row">
+    <input type="file">
+    <textarea placeholder="Measurements / special instructions"></textarea>
+  </div>
+
+  <div class="summary">✔ Customization captured (Prototype – no backend)</div>
+</section>
+
+<footer>
+  © 2025 StyleCraft • Complete Frontend Prototype
+</footer>
 
 <script>
-  let selectedProduct = '';
-  let selectedPrice = 0;
+function customize(name,price){
+  document.getElementById('customBox').style.display='block';
+  document.getElementById('prodName').innerText=name;
+  document.getElementById('prodPrice').innerText='Base Price: ₹'+price;
+  window.scrollTo({top:document.getElementById('customBox').offsetTop-20,behavior:'smooth'});
+}
 
-  function customize(name, price) {
-    selectedProduct = name;
-    selectedPrice = price;
-    document.getElementById('productName').innerText = name;
-    document.getElementById('customBox').style.display = 'block';
-    document.getElementById('customBox').scrollIntoView({behavior:'smooth'});
-  }
+function filterCat(cat,btn){
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(c=>{
+    c.style.display = (cat==='all'||c.dataset.cat===cat)?'block':'none';
+  });
+}
 
-  function placeOrder() {
-    const order = {
-      product: selectedProduct,
-      price: selectedPrice,
-      color: document.getElementById('color').value,
-      sleeve: document.getElementById('sleeve').value,
-      fit: document.getElementById('fit').value,
-      notes: document.getElementById('notes').value
-    };
-
-    document.getElementById('preview').innerHTML = `
-      <b>Order Summary (Frontend Prototype)</b><br><br>
-      Product: ${order.product}<br>
-      Price: ₹${order.price}<br>
-      Color: ${order.color}<br>
-      Sleeves: ${order.sleeve}<br>
-      Fit: ${order.fit}<br>
-      Notes: ${order.notes || 'N/A'}
-    `;
-
-    alert('Prototype Order Created! (No backend yet)');
-  }
+function sortProducts(type){
+  const list=document.getElementById('productList');
+  const cards=[...document.querySelectorAll('.card')];
+  if(type==='default')return;
+  cards.sort((a,b)=>type==='low'?a.dataset.price-b.dataset.price:b.dataset.price-a.dataset.price);
+  cards.forEach(c=>list.appendChild(c));
+}
 </script>
 
 </body>
